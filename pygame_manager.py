@@ -27,6 +27,7 @@ class PygameManager:
                 height (optional): Height of the window
         """
         self.rectangles = []
+        self.custom_colors = {}
         self.WIDTH = width
         self.HEIGHT = height
         self.FPS = PygameConstants.FPS
@@ -76,3 +77,20 @@ class PygameManager:
         """
         rect = Rectangle(x, y, width, height, color)
         self.rectangles.append(rect)
+
+    def create_custom_color(self, color_name, rgb):
+        """Creates a custom color using an RGB tuple.
+
+            Args:
+                color_name: The name of the newly created color.
+                rgb: The RGB values of the color in the form (r, g, b).
+        """
+        self.custom_colors[color_name] = rgb
+    
+    def get_custom_color(self, color_name):
+        """Gets the custom color that has already been created
+            
+            Args:
+                color_name: The name of the color that was created
+        """
+        return self.custom_colors[color_name]
