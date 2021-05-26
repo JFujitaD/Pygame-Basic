@@ -15,6 +15,7 @@ class PygameManager:
         self.HEIGHT = height
         self.FPS = constants.FPS
         self.clock = pygame.time.Clock()
+        self.background = constants.DEFAULT_BACKGROUND_COLOR
 
         pygame.init()
         self.window = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
@@ -30,5 +31,14 @@ class PygameManager:
                 
             # TODO Game logic
             
+            self.window.fill(self.background)
             pygame.display.update()
             self.clock.tick(self.FPS)
+
+    def set_background_color(self, color):
+        """Set the background of the main window
+
+            Args:
+                color: The new background color in the form (r, g, b).
+        """
+        self.background = color
