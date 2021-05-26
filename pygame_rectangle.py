@@ -1,0 +1,17 @@
+class Rectangle:
+    """A custom implementation for pygame.Rect that holds a color"""
+    def __init__(self, x, y, width, height, color):
+        """Creates a new instance of Rectangle
+
+            Args: 
+                x: Position of top left corner of rectangle.
+                y: Position of top left corner of rectangle.
+                width: Width of the rectangle.
+                height: Height of the rectangle. 
+                color: The rectangle's color. Use PygameColors.<color>
+        """
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.color = color

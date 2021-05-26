@@ -1,4 +1,4 @@
-from pygame_manager import PygameManager
+from pygame_manager import PygameManager, PygameColors
 
 
 def main():
@@ -8,7 +8,10 @@ def main():
         2. pm.start_game()
     """
     pm = PygameManager()
-    pm.set_background_color((255, 255, 0))
+
+    pm.set_background_color(PygameColors.BLACK)
+    pm.draw_rectangle(10, 10, 100, 80, PygameColors.RED)
+
     pm.start_game()
 
 
