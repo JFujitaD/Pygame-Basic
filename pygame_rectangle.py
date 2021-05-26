@@ -15,3 +15,10 @@ class Rectangle:
         self.width = width
         self.height = height
         self.color = color
+
+    def __str__(self):
+        representation = 'X: ' + str(self.x) + ' Y:' + str(self.y)
+        representation += '\nW: ' + str(self.width) + ' H: ' + str(self.height)
+        representation += '\nC: ' + str(self.color)
+
+        return representation

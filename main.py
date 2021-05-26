@@ -9,13 +9,16 @@ def main():
             2. # Add your own code here
             3. pm.start_game()
     """
+
     pm = PygameManager()
 
     pm.set_background_color(PygameColors.BLACK)
-    pm.draw_rectangle(10, 10, 100, 80, PygameColors.RED)
+    pm.draw_rectangle(10, 10, 100, 80, 'red_rect', PygameColors.RED)
 
     pm.create_custom_color('yellow', (255, 255, 0))
-    pm.draw_rectangle(80, 50, 10, 20, pm.get_custom_color('yellow'))
+    pm.draw_rectangle(80, 50, 10, 20, 'yellow_rect', pm.get_custom_color('yellow'))
+
+    print(pm.get_rectangle('yellow_rect'))
 
     pm.start_game()
 

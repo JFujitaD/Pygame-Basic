@@ -26,7 +26,7 @@ class PygameManager:
                 width (optional): Width of the window.
                 height (optional): Height of the window
         """
-        self.rectangles = []
+        self.rectangles = {}
         self.custom_colors = {}
         self.WIDTH = width
         self.HEIGHT = height
@@ -49,7 +49,7 @@ class PygameManager:
             # TODO Game logic
             self.window.fill(self.background)
 
-            for r in self.rectangles:
+            for r in self.rectangles.values():
                 py_rect = pygame.Rect(r.x, r.y, r.width, r.height)
                 pygame.draw.rect(self.window, r.color, py_rect)
             
@@ -64,7 +64,7 @@ class PygameManager:
         """
         self.background = color
 
-    def draw_rectangle(self, x, y, width, height, color):
+    def draw_rectangle(self, x, y, width, height, name, color):
         """Draws a rectangle on the window
 
             Args: 
@@ -72,11 +72,20 @@ class PygameManager:
                 y: Position of top left corner of rectangle.
                 width: Width of the rectangle.
                 height: Height of the rectangle. 
+                name: Name of the rectangle.
                 color: The rectangle's color. Use PygameColors.<color>
 
         """
         rect = Rectangle(x, y, width, height, color)
-        self.rectangles.append(rect)
+        self.rectangles[name] = rect
+
+    def get_rectangle(self, rect_name):
+        """Gets the rectangle that has been created
+
+            Args:
+                rect_name: The name of the rectangle.
+        """
+        return self.rectangles[rect_name]
 
     def create_custom_color(self, color_name, rgb):
         """Creates a custom color using an RGB tuple.
