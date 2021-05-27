@@ -10,18 +10,17 @@ def main():
             3. pm.start_game()
     """
 
-    pm = PygameManager()
+    pm = PygameManager(500, 500)
 
-    pm.set_background_color(PygameColors.NAVY)
-    pm.draw_rectangle(10, 10, 100, 80, 1, PygameColors.PURPLE)
+    pm.set_background_color(PygameColors.GRAY)
 
     pm.create_custom_color('gold', (255, 215, 0))
-    pm.draw_rectangle(80, 50, 10, 20, 2, pm.get_custom_color('gold'))
+    gold = pm.get_custom_color('gold')
+    
 
-    print(pm.get_rectangle(2))
-
-    pm.draw_text(100, 100, 24, 'Hello World!', 1, PygameColors.MAROON)
-    print(pm.get_text(1))
+    pm.draw_rectangle(25, 25, 450, 450, 1, gold)
+    pm.draw_text(30, 30, 50, 'Pygame Demo', 1, PygameColors.BLACK)
+    pm.draw_text(30, 70, 40, 'Smoll Text', 2, PygameColors.NAVY)
 
     pm.start_game()
 
