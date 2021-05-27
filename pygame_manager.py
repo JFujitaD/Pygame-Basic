@@ -43,6 +43,7 @@ class PygameManager:
         """
         self.rectangles = {}
         self.custom_colors = {}
+        self.texts = {}
         self.WIDTH = width
         self.HEIGHT = height
         self.FPS = PygameConstants.FPS
@@ -79,7 +80,7 @@ class PygameManager:
         """
         self.background = color
 
-    def draw_rectangle(self, x, y, width, height, name, color):
+    def draw_rectangle(self, x, y, width, height, rect_id, color):
         """Draws a rectangle on the window
 
             Args: 
@@ -87,26 +88,26 @@ class PygameManager:
                 y: Position of top left corner of rectangle.
                 width: Width of the rectangle.
                 height: Height of the rectangle. 
-                name: Name of the rectangle.
+                rect_id: Unique id of the rectangle.
                 color: The rectangle's color. Use PygameColors.<color>
 
         """
         rect = Rectangle(x, y, width, height, color)
-        self.rectangles[name] = rect
+        self.rectangles[rect_id] = rect
 
-    def get_rectangle(self, rect_name) -> pygame.Rect:
+    def get_rectangle(self, rect_id) -> pygame.Rect:
         """Gets the rectangle that has been created
 
             Args:
-                rect_name: The name of the rectangle.
+                rect_id: The unique id of the rectangle.
         """
-        return self.rectangles[rect_name]
+        return self.rectangles[rect_id]
 
     def create_custom_color(self, color_name, rgb):
         """Creates a custom color using an RGB tuple.
 
             Args:
-                color_name: The name of the newly created color.
+                color_name: The unique name of the newly created color.
                 rgb: The RGB values of the color in the form (r, g, b).
         """
         self.custom_colors[color_name] = rgb
@@ -115,6 +116,14 @@ class PygameManager:
         """Gets the custom color that has already been created
             
             Args:
-                color_name: The name of the color that was created
+                color_id: The unique name of the color that was created
         """
         return self.custom_colors[color_name]
+
+    def draw_text(self, size):
+        """Draws text on the screen
+
+            Args:
+                size: The font size.
+        """
+        font = pygame.font.SysFont(None, size)

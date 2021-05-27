@@ -13,12 +13,12 @@ def main():
     pm = PygameManager()
 
     pm.set_background_color(PygameColors.NAVY)
-    pm.draw_rectangle(10, 10, 100, 80, 'red_rect', PygameColors.PURPLE)
+    pm.draw_rectangle(10, 10, 100, 80, 1, PygameColors.PURPLE)
 
     pm.create_custom_color('gold', (255, 215, 0))
-    pm.draw_rectangle(80, 50, 10, 20, 'gold_rect', pm.get_custom_color('gold'))
+    pm.draw_rectangle(80, 50, 10, 20, 2, pm.get_custom_color('gold'))
 
-    print(pm.get_rectangle('gold_rect'))
+    print(pm.get_rectangle(2))
 
     pm.start_game()
 
