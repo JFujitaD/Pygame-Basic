@@ -20,6 +20,8 @@ def main():
 
     print(pm.get_rectangle(2))
 
+    pm.draw_text(100, 100, 24, 'Hello World!', 1, PygameColors.MAROON)
+
     pm.start_game()
 
 

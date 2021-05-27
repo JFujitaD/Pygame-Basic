@@ -1,3 +1,4 @@
+from pygame_text import Text
 from pygame_rectangle import Rectangle
 import pygame
 import sys
@@ -62,12 +63,17 @@ class PygameManager:
                     pygame.quit()
                     sys.exit()
                 
-            # TODO Game logic
+            # Game logic
             self.window.fill(self.background)
 
             for r in self.rectangles.values():
                 py_rect = pygame.Rect(r.x, r.y, r.width, r.height)
                 pygame.draw.rect(self.window, r.color, py_rect)
+
+            for t in self.texts.values():
+                font = pygame.font.SysFont(None, t.size)
+                screen = font.render(t.text, True, t.color)
+                self.window.blit(screen, (t.x, t.y))
             
             pygame.display.update()
             self.clock.tick(self.FPS)
@@ -120,10 +126,16 @@ class PygameManager:
         """
         return self.custom_colors[color_name]
 
-    def draw_text(self, size):
+    def draw_text(self, x, y, size, text, text_id, color):
         """Draws text on the screen
 
             Args:
+                x: Position of top left corner of text.
+                y: Position of top left corner of text.
                 size: The font size.
+                text: The text you want to display.
+                text_id: The unique id of the text
+                color: The color of the text
         """
-        font = pygame.font.SysFont(None, size)
+        layer = Text(x, y, size, text, color)
+        self.texts[text_id] = layer
