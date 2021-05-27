@@ -107,7 +107,10 @@ class PygameManager:
             Args:
                 rect_id: The unique id of the rectangle.
         """
-        return self.rectangles[rect_id]
+        try:
+            return self.rectangles[rect_id]
+        except KeyError:
+            print('Error: Rectangle with id of ' + str(rect_id) + ' does not exist.')
 
     def create_custom_color(self, color_name, rgb):
         """Creates a custom color using an RGB tuple.
@@ -124,7 +127,10 @@ class PygameManager:
             Args:
                 color_id: The unique name of the color that was created
         """
-        return self.custom_colors[color_name]
+        try:
+            return self.custom_colors[color_name]
+        except KeyError:
+            print('Error: Color with name of "' + color_name + '" does not exist.') 
 
     def draw_text(self, x, y, size, text, text_id, color):
         """Draws text on the screen
@@ -146,4 +152,7 @@ class PygameManager:
             Args:
                 text_id: The unique id of the text
         """
-        return self.texts[text_id]
+        try:
+            return self.texts[text_id]
+        except KeyError:
+            print('Error: Text with id of ' + str(text_id) + ' does not exist.')
