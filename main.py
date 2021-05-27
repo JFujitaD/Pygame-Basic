@@ -21,6 +21,7 @@ def main():
     pm.draw_rectangle(25, 25, 450, 450, 1, gold)
     pm.draw_text(30, 30, 50, 'Pygame Demo', 1, PygameColors.BLACK)
     pm.draw_text(30, 70, 40, 'Smoll Text', 2, PygameColors.NAVY)
+    pm.draw_image(40, 80, 'Images/pygame.png')
 
     pm.start_game()
 

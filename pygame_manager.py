@@ -1,5 +1,6 @@
 from pygame_text import Text
 from pygame_rectangle import Rectangle
+from pygame_image import Image
 import pygame
 import sys
 
@@ -45,6 +46,7 @@ class PygameManager:
         self.rectangles = {}
         self.custom_colors = {}
         self.texts = {}
+        self.images = {}
         self.WIDTH = width
         self.HEIGHT = height
         self.FPS = PygameConstants.FPS
@@ -74,6 +76,10 @@ class PygameManager:
                 font = pygame.font.SysFont(None, t.size)
                 screen = font.render(t.text, True, t.color)
                 self.window.blit(screen, (t.x, t.y))
+
+            for k, v in self.images.items():
+                image = pygame.image.load(k)
+                self.window.blit(image, (v.x, v.y))
             
             pygame.display.update()
             self.clock.tick(self.FPS)
@@ -156,3 +162,14 @@ class PygameManager:
             return self.texts[text_id]
         except KeyError:
             print('Error: Text with id of ' + str(text_id) + ' does not exist.')
+
+    def draw_image(self, x, y, file_path):
+        """Draws the image on the screen
+        
+            Args:
+                x: Position of top left corner of text.
+                y: Position of top left corner of text.
+                file_path: The path of the image file.
+        """
+        image = Image(x, y)
+        self.images[file_path] = image
