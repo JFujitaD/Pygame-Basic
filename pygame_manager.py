@@ -139,3 +139,11 @@ class PygameManager:
         """
         layer = Text(x, y, size, text, color)
         self.texts[text_id] = layer
+
+    def get_text(self, text_id):
+        """Gets the text that has been created
+        
+            Args:
+                text_id: The unique id of the text
+        """
+        return self.texts[text_id]

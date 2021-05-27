@@ -21,6 +21,7 @@ def main():
     print(pm.get_rectangle(2))
 
     pm.draw_text(100, 100, 24, 'Hello World!', 1, PygameColors.MAROON)
+    print(pm.get_text(1))
 
     pm.start_game()
 
