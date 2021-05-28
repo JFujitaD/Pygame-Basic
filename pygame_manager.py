@@ -67,6 +67,7 @@ class PygameManager:
         self.window = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
         pygame.display.set_caption(PygameConstants.DEFAULT_CAPTION)
 
+
     def start_game(self):
         """Starts the game loop"""
         while True:
@@ -100,6 +101,7 @@ class PygameManager:
             pygame.display.update()
             self.clock.tick(self.FPS)
 
+            
     def set_background_color(self, color):
         """Set the background of the main window
 

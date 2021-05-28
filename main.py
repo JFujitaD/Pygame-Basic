@@ -33,9 +33,11 @@ def main():
 
     # Adding a key event
     snake = pm.get_image('Images/pygame.png')
+
     def a_key_pressed():
         snake.x -= 0.5
     pm.add_key_event(PygameKeys.K_A, a_key_pressed)
+    
     def d_key_pressed():
         snake.x += 0.5
     pm.add_key_event(PygameKeys.K_D, d_key_pressed)
