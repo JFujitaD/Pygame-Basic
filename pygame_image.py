@@ -11,3 +11,4 @@ class Image:
     
     def __str__(self):
         representation = 'T: Image X: ' + str(self.x) + ' Y: ' + str(self.y)
+        return representation

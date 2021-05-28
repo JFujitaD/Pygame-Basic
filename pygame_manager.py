@@ -173,3 +173,14 @@ class PygameManager:
         """
         image = Image(x, y)
         self.images[file_path] = image
+
+    def get_image(self, file_path):
+        """Gets the image that has been created
+
+            Args:
+                file_path: The path of the image file.
+        """
+        try:
+            return self.images[file_path]
+        except KeyError:
+            print('Error: Image with path of "' + file_path + '" does not exist.')
