@@ -11,22 +11,36 @@ def main():
             4. pm.start_game()
     """
 
+    # Initializing the game
     pm = PygameManager(500, 500)
 
+    # Setting the background color
     pm.set_background_color(PygameColors.GRAY)
 
+    # Creating a custom color
     pm.create_custom_color('gold', (255, 215, 0))
     gold = pm.get_custom_color('gold')
     
+    # Drawing a rectangle
     pm.draw_rectangle(25, 25, 450, 450, 1, gold)
+
+    # Drawing text
     pm.draw_text(40, 40, 50, 'Pygame Demo', 1, PygameColors.BLACK)
     pm.draw_text(45, 80, 40, 'Smoll Text', 2, PygameColors.NAVY)
+
+    # Drawing an image
     pm.draw_image(50, 150, 'Images/pygame.png')
 
-    def w_key_pressed():
-        print('W key was pressed')
-    pm.add_key_event(PygameKeys.K_W, w_key_pressed)
+    # Adding a key event
+    snake = pm.get_image('Images/pygame.png')
+    def a_key_pressed():
+        snake.x -= 0.5
+    pm.add_key_event(PygameKeys.K_A, a_key_pressed)
+    def d_key_pressed():
+        snake.x += 0.5
+    pm.add_key_event(PygameKeys.K_D, d_key_pressed)
 
+    # Starting the game
     pm.start_game()
 
 
