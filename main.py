@@ -15,7 +15,7 @@ def main():
     pm = PygameManager(500, 500)
 
     # Setting the background image
-    pm.set_background_image('Images/space.png')
+    pm.set_background_image('Images/space_500.png')
 
     # Creating a custom color
     pm.create_custom_color('gold', (255, 215, 50))
