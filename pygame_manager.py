@@ -17,7 +17,7 @@ class PygameKeys:
     """The constants for key pressed used in main"""
     K_W = pygame.K_w
     K_A = pygame.K_a
-    K_S = pygame.K_S
+    K_S = pygame.K_s
     K_D = pygame.K_d
 
 class PygameColors:
@@ -55,6 +55,8 @@ class PygameManager:
         self.custom_colors = {}
         self.texts = {}
         self.images = {}
+        self.events = {}
+
         self.WIDTH = width
         self.HEIGHT = height
         self.FPS = PygameConstants.FPS
@@ -75,9 +77,9 @@ class PygameManager:
                     
             # Do something with the pressed keys
             keys = pygame.key.get_pressed()
-            if keys[pygame.K_ESCAPE]:
-                pygame.quit()
-                sys.exit()
+            for k, v in self.events.items():
+                if keys[k]:
+                    v()
 
             self.window.fill(self.background)
 
@@ -198,3 +200,12 @@ class PygameManager:
             return self.images[file_path]
         except KeyError:
             print('Error: Image with path of "' + file_path + '" does not exist.')
+
+    def add_key_event(self, key, func):
+        """Adds an event listener for the specified key, and assigns a function to the key
+        
+            Args:
+                key: The key that activates the function. Use PygameKeys.<key>
+                func: The function that should run when the key is pressed.
+        """
+        self.events[key] = func
