@@ -11,6 +11,14 @@ class PygameConstants:
     WIDTH = 900
     HEIGHT = 600
     DEFAULT_BACKGROUND_COLOR = (128, 128, 128)
+    DEFAULT_CAPTION = 'Pygame Manager'
+
+class PygameKeys:
+    """The constants for key pressed used in main"""
+    K_W = pygame.K_w
+    K_A = pygame.K_a
+    K_S = pygame.K_S
+    K_D = pygame.K_d
 
 class PygameColors:
     """The color constants used in main
@@ -55,7 +63,7 @@ class PygameManager:
 
         pygame.init()
         self.window = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
-        pygame.display.set_caption('Pygame Manager')
+        pygame.display.set_caption(PygameConstants.DEFAULT_CAPTION)
 
     def start_game(self):
         """Starts the game loop"""
@@ -64,10 +72,16 @@ class PygameManager:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-                
-            # Game logic
+                    
+            # Do something with the pressed keys
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_ESCAPE]:
+                pygame.quit()
+                sys.exit()
+
             self.window.fill(self.background)
 
+            # Iterate through all objects and draw them on screen
             for r in self.rectangles.values():
                 py_rect = pygame.Rect(r.x, r.y, r.width, r.height)
                 pygame.draw.rect(self.window, r.color, py_rect)
