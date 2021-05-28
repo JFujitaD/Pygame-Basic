@@ -61,7 +61,8 @@ class PygameManager:
         self.HEIGHT = height
         self.FPS = PygameConstants.FPS
         self.clock = pygame.time.Clock()
-        self.background = PygameConstants.DEFAULT_BACKGROUND_COLOR
+        self.background_color = PygameConstants.DEFAULT_BACKGROUND_COLOR
+        self.background_image = None
 
         pygame.init()
         self.window = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
@@ -82,8 +83,13 @@ class PygameManager:
                 if keys[k]:
                     v()
 
-            self.window.fill(self.background)
+            if self.background_image is None:
+                self.window.fill(self.background_color)
+            else:
+                bg_image = pygame.image.load(self.background_image)
+                self.window.blit(bg_image, (0, 0))
 
+            
             # Iterate through all objects and draw them on screen
             for r in self.rectangles.values():
                 py_rect = pygame.Rect(r.x, r.y, r.width, r.height)
@@ -103,12 +109,43 @@ class PygameManager:
 
             
     def set_background_color(self, color):
-        """Set the background of the main window
+        """Set the background color of the main window
 
             Args:
                 color: The new background color. Use PygameColors.<color>
         """
-        self.background = color
+        self.background_image = None
+        self.background_color = color
+
+    def set_background_image(self, file_path):
+        """Sets the background image of the main window
+        
+            Args:
+                file_path: The path of the image file.
+        """
+        self.background_image = file_path
+
+    def draw_image(self, x, y, file_path):
+        """Draws the image on the screen
+        
+            Args:
+                x: Position of top left corner of text.
+                y: Position of top left corner of text.
+                file_path: The path of the image file.
+        """
+        image = Image(x, y)
+        self.images[file_path] = image
+
+    def get_image(self, file_path):
+        """Gets the image that has been drawn
+
+            Args:
+                file_path: The path of the image file.
+        """
+        try:
+            return self.images[file_path]
+        except KeyError:
+            print('Error: Image with path of "' + file_path + '" does not exist.')
 
     def draw_rectangle(self, x, y, width, height, rect_id, color):
         """Draws a rectangle on the window
@@ -180,28 +217,6 @@ class PygameManager:
             return self.texts[text_id]
         except KeyError:
             print('Error: Text with id of ' + str(text_id) + ' does not exist.')
-
-    def draw_image(self, x, y, file_path):
-        """Draws the image on the screen
-        
-            Args:
-                x: Position of top left corner of text.
-                y: Position of top left corner of text.
-                file_path: The path of the image file.
-        """
-        image = Image(x, y)
-        self.images[file_path] = image
-
-    def get_image(self, file_path):
-        """Gets the image that has been created
-
-            Args:
-                file_path: The path of the image file.
-        """
-        try:
-            return self.images[file_path]
-        except KeyError:
-            print('Error: Image with path of "' + file_path + '" does not exist.')
 
     def add_key_event(self, key, func):
         """Adds an event listener for the specified key, and assigns a function to the key

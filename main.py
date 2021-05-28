@@ -14,11 +14,11 @@ def main():
     # Initializing the game
     pm = PygameManager(500, 500)
 
-    # Setting the background color
-    pm.set_background_color(PygameColors.GRAY)
+    # Setting the background image
+    pm.set_background_image('Images/space.png')
 
     # Creating a custom color
-    pm.create_custom_color('gold', (255, 215, 0))
+    pm.create_custom_color('gold', (255, 215, 50))
     gold = pm.get_custom_color('gold')
     
     # Drawing a rectangle
