@@ -5,7 +5,9 @@ class KeyEvent:
         
             Args:
                 func: The function that should be executed.
-                delay: The delay between function execution in milliseconds.
+                delay: The delay between function execution.
         """
         self.func = func
         self.delay = delay
+        self.last_activated = 0
+        

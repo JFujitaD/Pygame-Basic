@@ -100,8 +100,11 @@ class PygameManager:
             # Iterate through all objects and draw them on screen
             keys = pygame.key.get_pressed()
             for k, v in self.key_events.items():
-                if keys[k] and pygame.time.get_ticks() % v.delay < 10:
+                if keys[k] and v.last_activated <= 0:
+                    v.last_activated = v.delay
                     v.func()
+                else:
+                    v.last_activated -= 1
 
             for event in self.events.values():
                 event()
@@ -257,7 +260,7 @@ class PygameManager:
             print('Error: Text with id of ' + str(text_id) + ' does not exist.')
 
 
-    def add_key_event(self, key, func, delay=1):
+    def add_key_event(self, key, func, delay=0):
         """Adds an event listener for the specified key, and assigns a function to the key
         
             Args:
