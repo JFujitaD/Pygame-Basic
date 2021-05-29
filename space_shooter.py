@@ -37,7 +37,8 @@ pm.add_key_event(PygameKeys.K_SPACE, fire_bullet)
 def move_bullet():
     for bullet in bullets:
         pm.move_up(bullet, 10, False)
-    print(len(bullets))
+        if not pm.is_on_screen(bullet):
+            pm.remove_rectangle_by_value(bullet)
 
 pm.add_event(1, move_bullet)
 

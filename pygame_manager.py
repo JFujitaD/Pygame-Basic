@@ -195,7 +195,7 @@ class PygameManager:
             Args:
                 rect_id: The unique id of the rectangle.
         """
-        self.rectangles[rect_id] = None
+        del self.rectangles[rect_id]
 
     def remove_rectangle_by_value(self, rect):
         """Removes the rectangle that has been created by value
@@ -205,7 +205,8 @@ class PygameManager:
         """
         for k, v in self.rectangles.items():
             if v == rect:
-                self.rectangles[k] == None
+                del self.rectangles[k]
+                break
 
 
     def create_custom_color(self, color_name, rgb):
