@@ -101,7 +101,7 @@ class PygameManager:
             keys = pygame.key.get_pressed()
             for k, v in self.key_events.items():
                 if keys[k] and v.last_activated <= 0:
-                    v.last_activated = v.delay
+                    v.last_activated = v.frequency
                     v.func()
                 else:
                     v.last_activated -= 1
@@ -260,15 +260,18 @@ class PygameManager:
             print('Error: Text with id of ' + str(text_id) + ' does not exist.')
 
 
-    def add_key_event(self, key, func, delay=0):
+    def add_key_event(self, key, func, frequency=None):
         """Adds an event listener for the specified key, and assigns a function to the key
         
             Args:
                 key: The key that activates the function. Use PygameKeys.<key>
                 func: The function that should run when the key is pressed.
-                delay: The delay between function calls. DELAY / FPS = CALLS PER SECOND.
+                frequency: The number of times the function is executed per second.
         """
-        self.key_events[key] = KeyEvent(func, delay)
+        if frequency is None:
+            self.key_events[key] = KeyEvent(func, 0)
+        else:
+            self.key_events[key] = KeyEvent(func, frequency)
 
     def add_event(self, event_id, func):
         """Adds an event that is run every game tick
