@@ -266,7 +266,7 @@ class PygameManager:
             Args:
                 key: The key that activates the function. Use PygameKeys.<key>
                 func: The function that should run when the key is pressed.
-                delay: The delay between function calls
+                delay: The delay between function calls. DELAY / FPS = CALLS PER SECOND.
         """
         self.key_events[key] = KeyEvent(func, delay)
 

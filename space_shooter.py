@@ -31,7 +31,7 @@ def fire_bullet():
     uuid = pm.get_uuid()
     pm.draw_rectangle(spaceship.x - 1 + spaceship.width / 2, spaceship.y - 10, 2, 10, uuid, PygameColors.RED)
     bullets.append(pm.get_rectangle(uuid))
-pm.add_key_event(PygameKeys.K_SPACE, fire_bullet, 60)
+pm.add_key_event(PygameKeys.K_SPACE, fire_bullet, 6000)
 
 def move_bullet():
     for bullet in bullets:

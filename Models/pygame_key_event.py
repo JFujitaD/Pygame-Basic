@@ -5,7 +5,7 @@ class KeyEvent:
         
             Args:
                 func: The function that should be executed.
-                delay: The delay between function execution.
+                delay: The delay between function execution. DELAY / FPS = CALLS PER SECOND.
         """
         self.func = func
         self.delay = delay
