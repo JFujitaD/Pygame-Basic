@@ -1,3 +1,5 @@
+import pygame_manager
+
 class KeyEvent:
     """A wrapper class for an event to encapsulate delay time"""
     def __init__(self, func, frequency):
@@ -12,7 +14,7 @@ class KeyEvent:
         if frequency == 0:
             self.frequency = 0
         else:
-            self.frequency = 60 / frequency
-            
+            self.frequency =  pygame_manager.PygameConstants.FPS / frequency
+
         self.last_activated = 0
         
