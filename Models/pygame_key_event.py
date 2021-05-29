@@ -2,7 +2,7 @@ import pygame_manager
 
 class KeyEvent:
     """A wrapper class for an event to encapsulate delay time"""
-    def __init__(self, func, frequency):
+    def __init__(self, func, frequency) -> None:
         """Creates a key event
         
             Args:

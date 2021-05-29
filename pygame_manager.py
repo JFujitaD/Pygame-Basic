@@ -1,4 +1,5 @@
 from pygame.constants import K_RIGHT
+from pygame.rect import Rect
 from Models.pygame_text import Text
 from Models.pygame_rectangle import Rectangle
 from Models.pygame_image import Image
@@ -57,7 +58,7 @@ class PygameColors:
 
 
 class PygameManager:
-    def __init__(self, width=PygameConstants.WIDTH, height=PygameConstants.HEIGHT):
+    def __init__(self, width=PygameConstants.WIDTH, height=PygameConstants.HEIGHT) -> None:
         """Initializes the game
 
             Args:
@@ -83,7 +84,7 @@ class PygameManager:
         pygame.display.set_caption(PygameConstants.DEFAULT_CAPTION)
 
 
-    def start_game(self):
+    def start_game(self) -> None:
         """Starts the game loop"""
         while True:
             for event in pygame.event.get():
@@ -126,7 +127,7 @@ class PygameManager:
             self.clock.tick(self.FPS)
 
             
-    def set_background_color(self, color):
+    def set_background_color(self, color) -> None:
         """Set the background color of the main window
 
             Args:
@@ -135,7 +136,7 @@ class PygameManager:
         self.background_image = None
         self.background_color = color
 
-    def set_background_image(self, file_path):
+    def set_background_image(self, file_path) -> None:
         """Sets the background image of the main window
         
             Args:
@@ -144,22 +145,29 @@ class PygameManager:
         self.background_image = file_path
 
 
-    def draw_image(self, x, y, file_path):
+    def draw_image(self, x, y, file_path) -> Image:
         """Draws the image on the screen
         
             Args:
                 x: Position of top left corner of text.
                 y: Position of top left corner of text.
                 file_path: The path of the image file.
+
+            Returns:
+                Image: The drawn image.
         """
         image = Image(x, y, file_path)
         self.images[file_path] = image
+        return image
 
-    def get_image(self, file_path):
+    def get_image(self, file_path) -> Image:
         """Gets the image that has been drawn
 
             Args:
                 file_path: The path of the image file.
+
+             Returns:
+                Image: An image.
         """
         try:
             return self.images[file_path]
@@ -167,7 +175,7 @@ class PygameManager:
             print('Error: Image with path of "' + file_path + '" does not exist.')
 
 
-    def draw_rectangle(self, x, y, width, height, rect_id, color):
+    def draw_rectangle(self, x, y, width, height, rect_id, color) -> Rectangle:
         """Draws a rectangle on the window
 
             Args: 
@@ -178,22 +186,28 @@ class PygameManager:
                 rect_id: Unique id of the rectangle.
                 color: The rectangle's color. Use PygameColors.<color>
 
+             Returns:
+                Rectangle: The drawn rectangle.
         """
         rect = Rectangle(x, y, width, height, color)
         self.rectangles[rect_id] = rect
+        return rect
 
-    def get_rectangle(self, rect_id) -> pygame.Rect:
+    def get_rectangle(self, rect_id) -> Rectangle:
         """Gets the rectangle that has been created
 
             Args:
                 rect_id: The unique id of the rectangle.
+            
+            Returns:
+                Rectangle: The rectangle.
         """
         try:
             return self.rectangles[rect_id]
         except KeyError:
             print('Error: Rectangle with id of ' + str(rect_id) + ' does not exist.')
 
-    def remove_rectangle_by_key(self, rect_id):
+    def remove_rectangle_by_key(self, rect_id) -> None:
         """Removes the rectangle that has been created by key
 
             Args:
@@ -201,7 +215,7 @@ class PygameManager:
         """
         del self.rectangles[rect_id]
 
-    def remove_rectangle_by_value(self, rect):
+    def remove_rectangle_by_value(self, rect) -> None:
         """Removes the rectangle that has been created by value
 
             Args:
@@ -213,20 +227,27 @@ class PygameManager:
                 break
 
 
-    def create_custom_color(self, color_name, rgb):
+    def create_custom_color(self, color_name, rgb) -> tuple:
         """Creates a custom color using an RGB tuple.
 
             Args:
                 color_name: The unique name of the newly created color.
                 rgb: The RGB values of the color in the form (r, g, b).
+            
+            Returns:
+                tuple: A tuple with three values.
         """
         self.custom_colors[color_name] = rgb
+        return rgb
     
     def get_custom_color(self, color_name) -> tuple:
         """Gets the custom color that has already been created
             
             Args:
                 color_id: The unique name of the color that was created
+
+            Returns:
+                tuple: A tuple with three values.
         """
         try:
             return self.custom_colors[color_name]
@@ -234,7 +255,7 @@ class PygameManager:
             print('Error: Color with name of "' + color_name + '" does not exist.') 
 
 
-    def draw_text(self, x, y, size, text, text_id, color):
+    def draw_text(self, x, y, size, text, text_id, color) -> Text:
         """Draws text on the screen
 
             Args:
@@ -244,15 +265,22 @@ class PygameManager:
                 text: The text you want to display.
                 text_id: The unique id of the text
                 color: The color of the text
+
+            Returns:
+                Text: The drawn text.
         """
         layer = Text(x, y, size, text, color)
         self.texts[text_id] = layer
+        return layer
 
     def get_text(self, text_id) -> Text:
         """Gets the text that has been created
         
             Args:
                 text_id: The unique id of the text
+
+            Returns:
+                Text: The text.
         """
         try:
             return self.texts[text_id]
@@ -260,7 +288,7 @@ class PygameManager:
             print('Error: Text with id of ' + str(text_id) + ' does not exist.')
 
 
-    def add_key_event(self, key, func, frequency=None):
+    def add_key_event(self, key, func, frequency=None) -> None:
         """Adds an event listener for the specified key, and assigns a function to the key
         
             Args:
@@ -273,7 +301,7 @@ class PygameManager:
         else:
             self.key_events[key] = KeyEvent(func, frequency)
 
-    def add_event(self, event_id, func):
+    def add_event(self, event_id, func) -> None:
         """Adds an event that is run every game tick
         
             Args:
@@ -289,6 +317,9 @@ class PygameManager:
             Args:
                 rect: The rectangle that is going to be tested.
                 remove: If true, remove the given rectangle.
+            
+            Returns:
+                bool: True if the given rect is on the screen.
         """
         if not (rect.x + rect.width > 0 and rect.x < self.WIDTH):
             self.remove_rectangle_by_value(rect)
@@ -298,7 +329,7 @@ class PygameManager:
             return False
         return True
     
-    def move_left(self, object, speed, check=False):
+    def move_left(self, object, speed, check=False) -> None:
         """Tries to move the object to the left.
         
             Args:
@@ -312,7 +343,7 @@ class PygameManager:
         else:
             object.x -= speed
         
-    def move_right(self, object, speed, check=False):
+    def move_right(self, object, speed, check=False) -> None:
         """Tries to move the object to the right.
         
             Args:
@@ -326,7 +357,7 @@ class PygameManager:
         else:
             object.x += speed
 
-    def move_up(self, object, speed, check=False):
+    def move_up(self, object, speed, check=False) -> None:
         """Tries to move the object up.
         
             Args:
@@ -340,7 +371,7 @@ class PygameManager:
         else:
             object.y -= speed
 
-    def move_down(self, object, speed, check=False):
+    def move_down(self, object, speed, check=False) -> None:
         """Tries to move the object down.
         
             Args:
@@ -356,5 +387,9 @@ class PygameManager:
 
     
     def get_uuid(self) -> int:
-        """Returns a universally unique identifier, A.K.A. a unique integer"""
+        """Returns a universally unique identifier, A.K.A. a unique integer
+        
+            Returns:
+                int: The universally unique identifier (UUID).    
+        """
         return uuid.uuid4().int

@@ -2,8 +2,9 @@ from pygame import image
 
 
 class Image:
-    def __init__(self, x, y, file_path):
-        """A custom implementation of pygame.image that only holds x and y coordinates
+    """A custom implementation of pygame.image that only holds x and y coordinates"""
+    def __init__(self, x, y, file_path) -> None:
+        """Creates a new Image
         
             Args:
                 x: Position of top left corner of image.
@@ -17,6 +18,6 @@ class Image:
         self.width = img.get_size()[0]
         self.height = img.get_size()[1]
     
-    def __str__(self):
+    def __str__(self) -> str:
         representation = 'T: Image X: ' + str(self.x) + ' Y: ' + str(self.y)
         return representation

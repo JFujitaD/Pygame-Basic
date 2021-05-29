@@ -1,6 +1,6 @@
 class Text:
     """A custom implementation for pygame.text that holds a coordinate"""
-    def __init__(self, x, y, size, text, color):
+    def __init__(self, x, y, size, text, color) -> None:
         """Creates a new instance of Text
 
             Args: 

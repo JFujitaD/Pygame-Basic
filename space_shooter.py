@@ -4,8 +4,7 @@ pm = PygameManager(800, 800)
 
 pm.set_background_image('Images/space_800.png')
 
-pm.draw_image(pm.WIDTH/2, pm.HEIGHT/2, 'Images/spaceship.png')
-spaceship = pm.get_image('Images/spaceship.png')
+spaceship = pm.draw_image(pm.WIDTH/2, pm.HEIGHT/2, 'Images/spaceship.png')
 speed = 3
 
 def spaceship_left():
@@ -29,8 +28,7 @@ bullets = []
 
 def fire_bullet():
     uuid = pm.get_uuid()
-    pm.draw_rectangle(spaceship.x - 1 + spaceship.width / 2, spaceship.y - 10, 2, 10, uuid, PygameColors.RED)
-    bullets.append(pm.get_rectangle(uuid))
+    bullets.append(pm.draw_rectangle(spaceship.x - 1 + spaceship.width / 2, spaceship.y - 10, 2, 10, uuid, PygameColors.RED))
 pm.add_key_event(PygameKeys.K_SPACE, fire_bullet, 5)
 
 def move_bullet():
