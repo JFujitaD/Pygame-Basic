@@ -39,7 +39,7 @@ def fire_bullet():
     bullet.y -= bullet.height
 
     bullets.append(bullet)
-pm.add_key_event(PygameKeys.K_SPACE, fire_bullet, 5)
+pm.add_key_event(PygameKeys.M_RIGHT, fire_bullet, 5)
 
 def move_bullet():
     for bullet in bullets:

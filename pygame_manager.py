@@ -29,8 +29,10 @@ class PygameKeys:
     K_DOWN = pygame.K_DOWN
     K_RIGHT = pygame.K_RIGHT
 
-    M_LEFT = pygame.BUTTON_LEFT
-    M_RIGHT = pygame.BUTTON_RIGHT
+    M_LEFT = 1
+    M_MIDDLE = 2
+    M_RIGHT = 3
+    
     K_SPACE = pygame.K_SPACE
 
 
@@ -88,9 +90,19 @@ class PygameManager:
         """Starts the game loop"""
         while True:
             for event in pygame.event.get():
+                # Exit button pressed
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+                # Left click
+                if event.type == pygame.MOUSEBUTTONDOWN and event.button == PygameKeys.M_LEFT:
+                    self.try_key_event(PygameKeys.M_LEFT)
+                # Middle click
+                if event.type == pygame.MOUSEBUTTONDOWN and event.button == PygameKeys.M_MIDDLE:
+                    self.try_key_event(PygameKeys.M_MIDDLE)
+                # Right click
+                if event.type == pygame.MOUSEBUTTONDOWN and event.button == PygameKeys.M_RIGHT:
+                    self.try_key_event(PygameKeys.M_RIGHT)
                     
             if self.background_image is None:
                 self.window.fill(self.background_color)
@@ -321,6 +333,17 @@ class PygameManager:
             self.key_events[key] = KeyEvent(func, 0)
         else:
             self.key_events[key] = KeyEvent(func, frequency)
+
+    def try_key_event(self, key) -> None:
+        """Tries to execute the function of the key event with given key
+        
+            Args:
+                key: The key that activates this event.
+        """
+        try:
+            self.key_events[key].func()
+        except KeyError:
+            print('Error: Key event with the given key does not exist.')
 
     def add_event(self, event_id, func) -> None:
         """Adds an event that is run every game tick
