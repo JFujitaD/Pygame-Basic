@@ -4,6 +4,7 @@ from Models.pygame_rectangle import Rectangle
 from Models.pygame_image import Image
 import pygame
 import sys
+import uuid
 
 
 class PygameConstants:
@@ -345,3 +346,8 @@ class PygameManager:
                 object.y += speed
         else:
             object.y += speed
+
+    
+    def get_uuid(self) -> int:
+        """Returns a universally unique identifier, A.K.A. a unique integer"""
+        return uuid.uuid4().int

@@ -1,6 +1,5 @@
 from pygame import image
 from pygame_manager import PygameManager, PygameColors, PygameKeys
-import random
 
 pm = PygameManager(800, 800)
 
@@ -30,8 +29,9 @@ pm.add_key_event(PygameKeys.K_S, spaceship_down)
 bullets = []
 
 def fire_bullet():
-    pm.draw_rectangle(spaceship.x - 1 + spaceship.width / 2, spaceship.y - 10, 2, 10, len(bullets), PygameColors.RED)
-    bullets.append(pm.get_rectangle(len(bullets)))
+    uuid = pm.get_uuid()
+    pm.draw_rectangle(spaceship.x - 1 + spaceship.width / 2, spaceship.y - 10, 2, 10, uuid, PygameColors.RED)
+    bullets.append(pm.get_rectangle(uuid))
 pm.add_key_event(PygameKeys.K_SPACE, fire_bullet)
 
 def move_bullet():
@@ -39,7 +39,6 @@ def move_bullet():
         pm.move_up(bullet, speed, False)
         if not pm.is_on_screen(bullet, True):
             bullets.remove(bullet)
-    print(len(pm.rectangles))
 
 pm.add_event(1, move_bullet)
 
