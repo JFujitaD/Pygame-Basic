@@ -125,6 +125,7 @@ class PygameManager:
         """
         self.background_image = file_path
 
+
     def draw_image(self, x, y, file_path):
         """Draws the image on the screen
         
@@ -146,6 +147,7 @@ class PygameManager:
             return self.images[file_path]
         except KeyError:
             print('Error: Image with path of "' + file_path + '" does not exist.')
+
 
     def draw_rectangle(self, x, y, width, height, rect_id, color):
         """Draws a rectangle on the window
@@ -173,6 +175,7 @@ class PygameManager:
         except KeyError:
             print('Error: Rectangle with id of ' + str(rect_id) + ' does not exist.')
 
+
     def create_custom_color(self, color_name, rgb):
         """Creates a custom color using an RGB tuple.
 
@@ -192,6 +195,7 @@ class PygameManager:
             return self.custom_colors[color_name]
         except KeyError:
             print('Error: Color with name of "' + color_name + '" does not exist.') 
+
 
     def draw_text(self, x, y, size, text, text_id, color):
         """Draws text on the screen
@@ -218,6 +222,7 @@ class PygameManager:
         except KeyError:
             print('Error: Text with id of ' + str(text_id) + ' does not exist.')
 
+
     def add_key_event(self, key, func):
         """Adds an event listener for the specified key, and assigns a function to the key
         
@@ -226,6 +231,7 @@ class PygameManager:
                 func: The function that should run when the key is pressed.
         """
         self.events[key] = func
+
 
     def is_on_screen(self, object):
         """Checks if the given object is about to go off screen
@@ -238,4 +244,43 @@ class PygameManager:
         if not (object.y > 0 and object.y < self.HEIGHT - object.height):
             return False
         return True
+    
+    def move_left(self, object, speed):
+        """Tries to move the object to the left.
         
+            Args:
+                object: Rectangle or image.
+                speed: The speed to move the object
+        """
+        if object.x > 0:
+            object.x -= speed
+    
+    def move_right(self, object, speed):
+        """Tries to move the object to the right.
+        
+            Args:
+                object: Rectangle or image.
+                speed: The speed to move the object
+        """
+        if object.x + object.width < self.WIDTH:
+            object.x += speed
+
+    def move_up(self, object, speed):
+        """Tries to move the object up.
+        
+            Args:
+                object: Rectangle or image.
+                speed: The speed to move the object
+        """
+        if object.y > 0:
+            object.y -= speed
+
+    def move_down(self, object, speed):
+        """Tries to move the object down.
+        
+            Args:
+                object: Rectangle or image.
+                speed: The speed to move the object
+        """
+        if object.y + object.height < self.HEIGHT:
+            object.y += speed

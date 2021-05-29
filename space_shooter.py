@@ -8,25 +8,21 @@ pm.draw_image(pm.WIDTH/2, pm.HEIGHT/2, 'Images/spaceship.png')
 spaceship = pm.get_image('Images/spaceship.png')
 speed = 3
 
-def spaceship_up():
-    if pm.is_on_screen(spaceship):
-        spaceship.y -= speed
-pm.add_key_event(PygameKeys.K_W, spaceship_up)
-
-def spaceship_down():
-    if pm.is_on_screen(spaceship):
-        spaceship.y += speed
-pm.add_key_event(PygameKeys.K_S, spaceship_down)
-
 def spaceship_left():
-    if pm.is_on_screen(spaceship):
-        spaceship.x -= speed
+    pm.move_left(spaceship, speed)
 pm.add_key_event(PygameKeys.K_A, spaceship_left)
 
 def spaceship_right():
-    if pm.is_on_screen(spaceship):
-        spaceship.x += speed
+    pm.move_right(spaceship, speed)
 pm.add_key_event(PygameKeys.K_D, spaceship_right)
+
+def spaceship_up():
+    pm.move_up(spaceship, speed)
+pm.add_key_event(PygameKeys.K_W, spaceship_up)
+
+def spaceship_down():
+    pm.move_down(spaceship, speed)
+pm.add_key_event(PygameKeys.K_S, spaceship_down)
 
 
 pm.start_game()
