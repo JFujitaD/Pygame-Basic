@@ -120,7 +120,7 @@ class PygameManager:
                 self.window.blit(screen, (t.x, t.y))
 
             for k, v in self.images.items():
-                image = pygame.image.load(k)
+                image = pygame.image.load(v.file_path)
                 self.window.blit(image, (v.x, v.y))
             
             pygame.display.update()
@@ -145,42 +145,55 @@ class PygameManager:
         self.background_image = file_path
 
 
-    def draw_image(self, x, y, file_path) -> Image:
+    def draw_image(self, x, y, image_id, file_path) -> Image:
         """Draws the image on the screen
         
             Args:
                 x: Position of top left corner of text.
                 y: Position of top left corner of text.
+                image_id: Unique id of the image.
                 file_path: The path of the image file.
 
             Returns:
                 Image: The drawn image.
         """
         image = Image(x, y, file_path)
-        self.images[file_path] = image
+        self.images[image_id] = image
         return image
 
-    def get_image(self, file_path) -> Image:
+    def get_image(self, image_id) -> Image:
         """Gets the image that has been drawn
 
             Args:
-                file_path: The path of the image file.
+                image_id: Unique id of the image.
 
              Returns:
                 Image: An image.
         """
         try:
-            return self.images[file_path]
+            return self.images[image_id]
         except KeyError:
-            print('Error: Image with path of "' + file_path + '" does not exist.')
+            print('Error: Image with id of "' + image_id + '" does not exist.')
 
-    def remove_image(self, image) -> None:
-        """Removes the image that has been created.
+    def remove_image_by_id(self, image_id) -> None:
+        """Removes the image that has been created by id.
 
             Args:
-                image: The image to be deleted.
+                image_id: Unique id of the image.
         """
-        del self.images[image.file_path]
+        del self.images[image_id]
+
+    def remove_image_by_value(self, image) -> None:
+        """Removes the image that has been created by value
+
+            Args:
+                rect: The image that needs to be removed.
+        """
+        for k, v in self.images.items():
+            if v == image:
+                del self.images[k]
+                break
+
 
 
     def draw_rectangle(self, x, y, width, height, rect_id, color) -> Rectangle:
@@ -215,8 +228,8 @@ class PygameManager:
         except KeyError:
             print('Error: Rectangle with id of ' + str(rect_id) + ' does not exist.')
 
-    def remove_rectangle_by_key(self, rect_id) -> None:
-        """Removes the rectangle that has been created by key
+    def remove_rectangle_by_id(self, rect_id) -> None:
+        """Removes the rectangle that has been created by the id
 
             Args:
                 rect_id: The unique id of the rectangle.
@@ -227,7 +240,7 @@ class PygameManager:
         """Removes the rectangle that has been created by value
 
             Args:
-                rect: The rectangle that needs to be removed
+                rect: The rectangle that needs to be removed.
         """
         for k, v in self.rectangles.items():
             if v == rect:
@@ -319,21 +332,29 @@ class PygameManager:
         self.events[event_id] = func
 
 
-    def is_on_screen(self, rect, remove=False) -> bool:
-        """Checks if the given rectangle is completely off of the screen
+    def is_on_screen(self, object, remove=False) -> bool:
+        """Checks if the given rectangle or image is completely off of the screen
         
             Args:
-                rect: The rectangle that is going to be tested.
-                remove: If true, remove the given rectangle.
+                object: The rectangle or image.
+                remove: If true, remove the given rectangle or image.
             
             Returns:
                 bool: True if the given rect is on the screen.
         """
-        if not (rect.x + rect.width > 0 and rect.x < self.WIDTH):
-            self.remove_rectangle_by_value(rect)
+        object_type = type(object)
+
+        if not (object.x + object.width > 0 and object.x < self.WIDTH):
+            if object_type == Rectangle:
+                self.remove_rectangle_by_value(object)
+            else:
+                self.remove_image_by_value(object)
             return False
-        if not (rect.y + rect.height > 0 and rect.y < self.HEIGHT):
-            self.remove_rectangle_by_value(rect)
+        if not (object.y + object.height > 0 and object.y < self.HEIGHT):
+            if object_type == Rectangle:
+                self.remove_rectangle_by_value(object)
+            else:
+                self.remove_image_by_value(object)
             return False
         return True
     
