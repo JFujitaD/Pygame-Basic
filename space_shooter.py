@@ -1,12 +1,11 @@
-from pygame import image
 from pygame_manager import PygameManager, PygameColors, PygameKeys
 
 pm = PygameManager(800, 800)
 
 pm.set_background_image('Images/space_800.png')
 
-pm.draw_image(pm.WIDTH/2, pm.HEIGHT/2, 'Images/penguin.png')
-spaceship = pm.get_image('Images/penguin.png')
+pm.draw_image(pm.WIDTH/2, pm.HEIGHT/2, 'Images/spaceship.png')
+spaceship = pm.get_image('Images/spaceship.png')
 speed = 3
 
 def spaceship_left():
