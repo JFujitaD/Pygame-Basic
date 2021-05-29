@@ -1,3 +1,4 @@
+from pygame import image
 from pygame_manager import PygameManager, PygameColors, PygameKeys
 import random
 
@@ -24,5 +25,15 @@ pm.add_key_event(PygameKeys.K_W, spaceship_up)
 def spaceship_down():
     pm.move_down(spaceship, speed, True)
 pm.add_key_event(PygameKeys.K_S, spaceship_down)
+
+def fire_bullet():
+    pm.draw_rectangle(spaceship.x - 1 + spaceship.width / 2, spaceship.y - 10, 2, 10, 2, PygameColors.RED)
+pm.add_key_event(PygameKeys.K_SPACE, fire_bullet)
+
+def move_bullet():
+    bullet = pm.get_rectangle(2)
+    if bullet is not None:
+        pm.move_up(bullet, 10)
+pm.add_event(1, move_bullet)
 
 pm.start_game()
