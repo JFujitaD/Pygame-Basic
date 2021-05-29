@@ -13,8 +13,9 @@ class Image:
         """
         self.x = x
         self.y = y
+        self.file_path = file_path
 
-        img = image.load(file_path)
+        img = image.load(self.file_path)
         self.width = img.get_size()[0]
         self.height = img.get_size()[1]
     

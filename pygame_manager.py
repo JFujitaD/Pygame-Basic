@@ -174,6 +174,14 @@ class PygameManager:
         except KeyError:
             print('Error: Image with path of "' + file_path + '" does not exist.')
 
+    def remove_image(self, image) -> None:
+        """Removes the image that has been created.
+
+            Args:
+                image: The image to be deleted.
+        """
+        del self.images[image.file_path]
+
 
     def draw_rectangle(self, x, y, width, height, rect_id, color) -> Rectangle:
         """Draws a rectangle on the window

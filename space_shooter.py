@@ -10,7 +10,7 @@ speed = 3
 
 # Asteroids
 pm.draw_image(10, 10, 'Images/asteroid_64.png')
-pm.draw_image(600, 100, 'Images/asteroid_128.png')
+asteroid = pm.draw_image(600, 100, 'Images/asteroid_128.png')
 pm.draw_image(300, 200, 'Images/asteroid_96.png')
 
 # Movement controls
