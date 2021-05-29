@@ -245,42 +245,58 @@ class PygameManager:
             return False
         return True
     
-    def move_left(self, object, speed):
+    def move_left(self, object, speed, check=False):
         """Tries to move the object to the left.
         
             Args:
                 object: Rectangle or image.
                 speed: The speed to move the object
+                check: Determins whether or not to check if the object will go off the screen
         """
-        if object.x > 0:
+        if check:
+            if object.x > 0:
+                object.x -= speed
+        else:
             object.x -= speed
-    
-    def move_right(self, object, speed):
+        
+    def move_right(self, object, speed, check=False):
         """Tries to move the object to the right.
         
             Args:
                 object: Rectangle or image.
                 speed: The speed to move the object
+                check: Determins whether or not to check if the object will go off the screen
         """
-        if object.x + object.width < self.WIDTH:
+        if check:
+            if object.x + object.width < self.WIDTH:
+                object.x += speed
+        else:
             object.x += speed
 
-    def move_up(self, object, speed):
+    def move_up(self, object, speed, check=False):
         """Tries to move the object up.
         
             Args:
                 object: Rectangle or image.
                 speed: The speed to move the object
+                check: Determins whether or not to check if the object will go off the screen
         """
-        if object.y > 0:
+        if check:
+            if object.y > 0:
+                object.y -= speed
+        else:
             object.y -= speed
 
-    def move_down(self, object, speed):
+    def move_down(self, object, speed, check=False):
         """Tries to move the object down.
         
             Args:
                 object: Rectangle or image.
                 speed: The speed to move the object
+                check: Determins whether or not to check if the object will go off the screen
         """
-        if object.y + object.height < self.HEIGHT:
+        if check:
+            if object.y + object.height < self.HEIGHT:
+                object.y += speed
+        else:
             object.y += speed
