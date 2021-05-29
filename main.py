@@ -29,11 +29,9 @@ def main():
     pm.draw_text(45, 80, 40, 'Smoll Text', 2, PygameColors.NAVY)
 
     # Drawing an image
-    pm.draw_image(50, 150, 'Images/pygame.png')
+    snake = pm.draw_image(50, 150, pm.get_uuid(), 'Images/pygame.png')
 
     # Adding a key event
-    snake = pm.get_image('Images/pygame.png')
-
     def a_key_pressed():
         snake.x -= 0.5
     pm.add_key_event(PygameKeys.K_A, a_key_pressed)

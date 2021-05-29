@@ -31,7 +31,14 @@ bullets = []
 
 def fire_bullet():
     uuid = pm.get_uuid()
-    bullets.append(pm.draw_image(spaceship.x - 1 + spaceship.width / 2, spaceship.y - 10, uuid, 'Images/asteroid_64.png'))
+    x = spaceship.x + (spaceship.width / 2)
+    y = spaceship.y
+
+    bullet = pm.draw_image(x, y, uuid, 'Images/laser_small.png')
+    bullet.x -= bullet.width / 2
+    bullet.y -= bullet.height
+
+    bullets.append(bullet)
 pm.add_key_event(PygameKeys.K_SPACE, fire_bullet, 5)
 
 def move_bullet():
