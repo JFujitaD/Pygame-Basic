@@ -1,3 +1,4 @@
+from pygame.constants import K_RIGHT
 from Models.pygame_text import Text
 from Models.pygame_rectangle import Rectangle
 from Models.pygame_image import Image
@@ -19,6 +20,16 @@ class PygameKeys:
     K_A = pygame.K_a
     K_S = pygame.K_s
     K_D = pygame.K_d
+
+    K_UP = pygame.K_UP
+    K_LEFT = pygame.K_LEFT
+    K_DOWN = pygame.K_DOWN
+    K_RIGHT = pygame.K_RIGHT
+
+    M_LEFT = pygame.BUTTON_LEFT
+    M_RIGHT = pygame.BUTTON_RIGHT
+    K_SPACE = pygame.K_SPACE
+
 
 class PygameColors:
     """The color constants used in main
