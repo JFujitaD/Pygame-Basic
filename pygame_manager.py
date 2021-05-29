@@ -1,6 +1,6 @@
-from pygame_text import Text
-from pygame_rectangle import Rectangle
-from pygame_image import Image
+from Models.pygame_text import Text
+from Models.pygame_rectangle import Rectangle
+from Models.pygame_image import Image
 import pygame
 import sys
 
@@ -133,7 +133,7 @@ class PygameManager:
                 y: Position of top left corner of text.
                 file_path: The path of the image file.
         """
-        image = Image(x, y)
+        image = Image(x, y, file_path)
         self.images[file_path] = image
 
     def get_image(self, file_path):
@@ -226,3 +226,16 @@ class PygameManager:
                 func: The function that should run when the key is pressed.
         """
         self.events[key] = func
+
+    def is_on_screen(self, object):
+        """Checks if the given object is about to go off screen
+        
+            Args:
+                object: Rectangle or image.
+        """
+        if not (object.x > 0 and object.x < self.WIDTH - object.width):
+            return False
+        if not (object.y > 0 and object.y < self.HEIGHT - object.height):
+            return False
+        return True
+        
