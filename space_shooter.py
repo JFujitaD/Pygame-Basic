@@ -26,14 +26,20 @@ def spaceship_down():
     pm.move_down(spaceship, speed, True)
 pm.add_key_event(PygameKeys.K_S, spaceship_down)
 
+
+bullets = []
+
 def fire_bullet():
-    pm.draw_rectangle(spaceship.x - 1 + spaceship.width / 2, spaceship.y - 10, 2, 10, 2, PygameColors.RED)
+    pm.draw_rectangle(spaceship.x - 1 + spaceship.width / 2, spaceship.y - 10, 2, 10, len(bullets), PygameColors.RED)
+    bullets.append(pm.get_rectangle(len(bullets)))
 pm.add_key_event(PygameKeys.K_SPACE, fire_bullet)
 
 def move_bullet():
-    bullet = pm.get_rectangle(2)
-    if bullet is not None:
-        pm.move_up(bullet, 10)
+    for bullet in bullets:
+        pm.move_up(bullet, 10, False)
+    print(len(bullets))
+
 pm.add_event(1, move_bullet)
+
 
 pm.start_game()

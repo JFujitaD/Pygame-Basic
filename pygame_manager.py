@@ -189,6 +189,24 @@ class PygameManager:
         except KeyError:
             print('Error: Rectangle with id of ' + str(rect_id) + ' does not exist.')
 
+    def remove_rectangle_by_key(self, rect_id):
+        """Removes the rectangle that has been created by key
+
+            Args:
+                rect_id: The unique id of the rectangle.
+        """
+        self.rectangles[rect_id] = None
+
+    def remove_rectangle_by_value(self, rect):
+        """Removes the rectangle that has been created by value
+
+            Args:
+                rect: The rectangle that needs to be removed
+        """
+        for k, v in self.rectangles.items():
+            if v == rect:
+                self.rectangles[k] == None
+
 
     def create_custom_color(self, color_name, rgb):
         """Creates a custom color using an RGB tuple.
@@ -225,7 +243,7 @@ class PygameManager:
         layer = Text(x, y, size, text, color)
         self.texts[text_id] = layer
 
-    def get_text(self, text_id):
+    def get_text(self, text_id) -> Text:
         """Gets the text that has been created
         
             Args:
@@ -256,7 +274,7 @@ class PygameManager:
         self.events[event_id] = func
 
 
-    def is_on_screen(self, object):
+    def is_on_screen(self, object) -> bool:
         """Checks if the given object is about to go off screen
         
             Args:
