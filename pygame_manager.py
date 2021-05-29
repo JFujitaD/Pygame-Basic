@@ -2,6 +2,7 @@ from pygame.constants import K_RIGHT
 from Models.pygame_text import Text
 from Models.pygame_rectangle import Rectangle
 from Models.pygame_image import Image
+from Models.pygame_key_event import KeyEvent
 import pygame
 import sys
 import uuid
@@ -95,13 +96,12 @@ class PygameManager:
             else:
                 bg_image = pygame.image.load(self.background_image)
                 self.window.blit(bg_image, (0, 0))
-
             
             # Iterate through all objects and draw them on screen
             keys = pygame.key.get_pressed()
             for k, v in self.key_events.items():
-                if keys[k]:
-                    v()
+                if keys[k] and pygame.time.get_ticks() % v.delay < 10:
+                    v.func()
 
             for event in self.events.values():
                 event()
@@ -257,14 +257,15 @@ class PygameManager:
             print('Error: Text with id of ' + str(text_id) + ' does not exist.')
 
 
-    def add_key_event(self, key, func):
+    def add_key_event(self, key, func, delay=1):
         """Adds an event listener for the specified key, and assigns a function to the key
         
             Args:
                 key: The key that activates the function. Use PygameKeys.<key>
                 func: The function that should run when the key is pressed.
+                delay: The delay between function calls
         """
-        self.key_events[key] = func
+        self.key_events[key] = KeyEvent(func, delay)
 
     def add_event(self, event_id, func):
         """Adds an event that is run every game tick
