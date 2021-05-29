@@ -55,6 +55,7 @@ class PygameManager:
         self.custom_colors = {}
         self.texts = {}
         self.images = {}
+        self.key_events = {}
         self.events = {}
 
         self.WIDTH = width
@@ -77,12 +78,6 @@ class PygameManager:
                     pygame.quit()
                     sys.exit()
                     
-            # Do something with the pressed keys
-            keys = pygame.key.get_pressed()
-            for k, v in self.events.items():
-                if keys[k]:
-                    v()
-
             if self.background_image is None:
                 self.window.fill(self.background_color)
             else:
@@ -91,6 +86,14 @@ class PygameManager:
 
             
             # Iterate through all objects and draw them on screen
+            keys = pygame.key.get_pressed()
+            for k, v in self.key_events.items():
+                if keys[k]:
+                    v()
+
+            for event in self.events.values():
+                event()
+
             for r in self.rectangles.values():
                 py_rect = pygame.Rect(r.x, r.y, r.width, r.height)
                 pygame.draw.rect(self.window, r.color, py_rect)
@@ -230,7 +233,16 @@ class PygameManager:
                 key: The key that activates the function. Use PygameKeys.<key>
                 func: The function that should run when the key is pressed.
         """
-        self.events[key] = func
+        self.key_events[key] = func
+
+    def add_event(self, event_id, func):
+        """Adds an event that is run every game tick
+        
+            Args:
+                event_id: The unique id for the event.
+                func: The function that should run every game tick.
+        """
+        self.events[event_id] = func
 
 
     def is_on_screen(self, object):

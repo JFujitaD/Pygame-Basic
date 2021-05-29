@@ -1,4 +1,5 @@
 from pygame_manager import PygameManager, PygameColors, PygameKeys
+import random
 
 pm = PygameManager(800, 800)
 
@@ -24,5 +25,10 @@ def spaceship_down():
     pm.move_down(spaceship, speed, True)
 pm.add_key_event(PygameKeys.K_S, spaceship_down)
 
+
+def random_event():
+    if random.random() < 0.1:
+        print('10 percent chance this code runs')
+pm.add_event(1, random_event)
 
 pm.start_game()
