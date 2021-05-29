@@ -276,14 +276,14 @@ class PygameManager:
 
 
     def is_on_screen(self, object) -> bool:
-        """Checks if the given object is about to go off screen
+        """Checks if the given object is completely off of the screen
         
             Args:
                 object: Rectangle or image.
         """
-        if not (object.x > 0 and object.x < self.WIDTH - object.width):
+        if not (object.x + object.width > 0 and object.x < self.WIDTH):
             return False
-        if not (object.y > 0 and object.y < self.HEIGHT - object.height):
+        if not (object.y + object.height > 0 and object.y < self.HEIGHT):
             return False
         return True
     
