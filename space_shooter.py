@@ -27,27 +27,39 @@ pm.add_key_event(PygameKeys.K_S, spaceship_down)
 
 
 # Firing mechanics
-bullets = []
+ammo = []
 
-def fire_bullet():
+def fire_laser():
     uuid = pm.get_uuid()
     x = spaceship.x + (spaceship.width / 2)
     y = spaceship.y
 
-    bullet = pm.draw_image(x, y, uuid, 'Images/laser_small.png')
-    bullet.x -= bullet.width / 2
-    bullet.y -= bullet.height
+    laser = pm.draw_image(x, y, uuid, 'Images/laser_small.png')
+    laser.x -= laser.width / 2
+    laser.y -= laser.height
 
-    bullets.append(bullet)
-pm.add_key_event(PygameKeys.M_RIGHT, fire_bullet, 5)
+    ammo.append(laser)
+pm.add_key_event(PygameKeys.M_LEFT, fire_laser)
 
-def move_bullet():
-    for bullet in bullets:
-        pm.move_up(bullet, speed, False)
-        if not pm.is_on_screen(bullet, True):
-            bullets.remove(bullet)
+def fire_bomb():
+    uuid = pm.get_uuid()
+    x = spaceship.x + (spaceship.width / 2)
+    y = spaceship.y
 
-pm.add_event(1, move_bullet)
+    bomb = pm.draw_image(x, y, uuid, 'Images/bomb_small.png')
+    bomb.x -= bomb.width / 2
+    bomb.y -= bomb.height
+
+    ammo.append(bomb)
+pm.add_key_event(PygameKeys.M_RIGHT, fire_bomb)
+
+def move_ammo():
+    for a in ammo:
+        pm.move_up(a, speed, False)
+        if not pm.is_on_screen(a, True):
+            ammo.remove(a)
+
+pm.add_event(1, move_ammo)
 
 
 # Start game

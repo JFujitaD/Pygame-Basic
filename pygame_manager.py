@@ -327,7 +327,7 @@ class PygameManager:
             Args:
                 key: The key that activates the function. Use PygameKeys.<key>
                 func: The function that should run when the key is pressed.
-                frequency: The number of times the function is executed per second.
+                frequency: The number of times the function is executed per second. DOES NOT WORK WITH MOUSE EVENTS.
         """
         if frequency is None:
             self.key_events[key] = KeyEvent(func, 0)
