@@ -275,15 +275,18 @@ class PygameManager:
         self.events[event_id] = func
 
 
-    def is_on_screen(self, object) -> bool:
-        """Checks if the given object is completely off of the screen
+    def is_on_screen(self, rect, remove=False) -> bool:
+        """Checks if the given rectangle is completely off of the screen
         
             Args:
-                object: Rectangle or image.
+                rect: The rectangle that is going to be tested.
+                remove: If true, remove the given rectangle.
         """
-        if not (object.x + object.width > 0 and object.x < self.WIDTH):
+        if not (rect.x + rect.width > 0 and rect.x < self.WIDTH):
+            self.remove_rectangle_by_value(rect)
             return False
-        if not (object.y + object.height > 0 and object.y < self.HEIGHT):
+        if not (rect.y + rect.height > 0 and rect.y < self.HEIGHT):
+            self.remove_rectangle_by_value(rect)
             return False
         return True
     
