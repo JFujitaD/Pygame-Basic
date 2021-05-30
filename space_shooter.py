@@ -68,6 +68,5 @@ def move_ammo():
 
 pm.add_event(1, move_ammo)
 
-
 # Start game
 pm.start_game()

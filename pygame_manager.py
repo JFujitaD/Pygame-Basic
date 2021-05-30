@@ -385,6 +385,21 @@ class PygameManager:
             return False
         return True
     
+    def check_collision(self, object1, object2) -> bool:
+        """Checks if the given rectangles or images are colliding
+        
+            Args:
+                object1: The first rectangle or image.
+                object2: The second rectangle or image.
+
+            Returns:
+                bool: True if the rectangles or images have collided.
+        """
+        o1 = pygame.Rect(object1.x, object1.y, object1.width, object1.height)
+        o2 = pygame.Rect(object2.x, object2.y, object2.width, object2.height)
+
+        return o1.colliderect(o2)
+    
     def move_left(self, object, speed, check=False) -> None:
         """Tries to move the object to the left.
         
