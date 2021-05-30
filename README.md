@@ -11,3 +11,11 @@ pm = PygameManager()
 
 pm.start_game()
 ```
+
+## Help
+All of the models, classes, and methods have documentation notes attached. You can access class attributes if necessary, but most of the functionality is done through PygameManager. Look at main.py and space_shooter.py for an example. Run them by typing this in the terminal.
+```bash
+py main.py
+
+py space_shooter.py
+```
