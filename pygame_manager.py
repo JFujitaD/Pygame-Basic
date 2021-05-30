@@ -142,6 +142,14 @@ class PygameManager:
             pygame.display.update()
             self.clock.tick(self.FPS)
 
+    def stop_game(self) -> None:
+        """Removes all objects from the screen, including events"""
+        self.rectangles = {}
+        self.texts = {}
+        self.images = {}
+        self.key_events = {}
+        self.events = {}
+
             
     def set_background_color(self, color) -> None:
         """Set the background color of the main window
