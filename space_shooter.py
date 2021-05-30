@@ -8,6 +8,10 @@ pm.set_background_image('Images/space_800.png')
 spaceship = pm.draw_image(pm.WIDTH/2, pm.HEIGHT/2, 1, 'Images/spaceship.png')
 speed = 3
 
+# Text
+bullet_text = pm.draw_text(5, 5, 64, 'Score: 0', 1, PygameColors.WHITE)
+bullets_shot = 0
+
 # Movement controls
 def spaceship_left():
     pm.move_left(spaceship, speed, True)
@@ -38,6 +42,8 @@ def fire_laser():
     laser.x -= laser.width / 2
     laser.y -= laser.height
 
+    global bullets_shot
+    bullets_shot += 1
     ammo.append(laser)
 pm.add_key_event(PygameKeys.M_LEFT, fire_laser)
 
@@ -49,7 +55,7 @@ def fire_bomb():
     bomb = pm.draw_image(x, y, uuid, 'Images/bomb_small.png')
     bomb.x -= bomb.width / 2
     bomb.y -= bomb.height
-
+    
     ammo.append(bomb)
 pm.add_key_event(PygameKeys.M_RIGHT, fire_bomb)
 
@@ -58,6 +64,7 @@ def move_ammo():
         pm.move_up(a, speed, False)
         if not pm.is_on_screen(a, True):
             ammo.remove(a)
+    bullet_text.text = 'Score: ' + str(bullets_shot)
 
 pm.add_event(1, move_ammo)
 

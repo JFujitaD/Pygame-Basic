@@ -35,7 +35,6 @@ class PygameKeys:
     
     K_SPACE = pygame.K_SPACE
 
-
 class PygameColors:
     """The color constants used in main
 
@@ -111,6 +110,7 @@ class PygameManager:
                 self.window.blit(bg_image, (0, 0))
             
             # Iterate through all objects and draw them on screen
+            # Pressed keys
             keys = pygame.key.get_pressed()
             for k, v in self.key_events.items():
                 if keys[k] and v.last_activated <= 0:
@@ -119,21 +119,25 @@ class PygameManager:
                 else:
                     v.last_activated -= 1
 
+            # Continuous events
             for event in self.events.values():
                 event()
 
+            # Rectangles
             for r in self.rectangles.values():
                 py_rect = pygame.Rect(r.x, r.y, r.width, r.height)
                 pygame.draw.rect(self.window, r.color, py_rect)
 
+             # Images
+            for k, v in self.images.items():
+                image = pygame.image.load(v.file_path)
+                self.window.blit(image, (v.x, v.y))
+
+            # Text
             for t in self.texts.values():
                 font = pygame.font.SysFont(None, t.size)
                 screen = font.render(t.text, True, t.color)
                 self.window.blit(screen, (t.x, t.y))
-
-            for k, v in self.images.items():
-                image = pygame.image.load(v.file_path)
-                self.window.blit(image, (v.x, v.y))
             
             pygame.display.update()
             self.clock.tick(self.FPS)
