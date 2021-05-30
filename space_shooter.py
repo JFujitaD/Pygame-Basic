@@ -8,7 +8,10 @@ pm.set_background_image('Images/space_800.png')
 
 spaceship = pm.draw_image(pm.WIDTH/2, pm.HEIGHT/2, 1, 'Images/spaceship.png')
 speed = 3
+maximum_ammo = 5
 
+
+# Text
 score = pm.draw_text(5, 5, 64, 'Score: 0', 1, PygameColors.WHITE)
 asteroids_destroyed = 0
 
@@ -34,15 +37,16 @@ pm.add_key_event(PygameKeys.K_S, spaceship_down)
 ammo = []
 
 def fire_laser():
-    uuid = pm.get_uuid()
-    x = spaceship.x + (spaceship.width / 2)
-    y = spaceship.y
+    if len(ammo) < maximum_ammo:
+        uuid = pm.get_uuid()
+        x = spaceship.x + (spaceship.width / 2)
+        y = spaceship.y
 
-    laser = pm.draw_image(x, y, uuid, 'Images/laser_small.png')
-    laser.x -= laser.width / 2
-    laser.y -= laser.height
+        laser = pm.draw_image(x, y, uuid, 'Images/laser_small.png')
+        laser.x -= laser.width / 2
+        laser.y -= laser.height
 
-    ammo.append(laser)
+        ammo.append(laser)
 pm.add_key_event(PygameKeys.M_LEFT, fire_laser)
 
 def move_ammo():
@@ -58,7 +62,7 @@ pm.add_event(1, move_ammo)
 asteroids = []
 
 def spawn_asteroids():
-    if random.random() < 0.05:
+    if random.random() < 0.07:
         size = random.randint(0, 2)
         image = ''
 
@@ -103,7 +107,6 @@ def player_asteroid_collision():
             pm.draw_text(215, 300, 100, 'Game Over', pm.get_uuid(), PygameColors.RED)
 pm.add_event(4, player_asteroid_collision)
             
-
 
 # Start game
 pm.start_game()
