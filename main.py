@@ -2,7 +2,7 @@ from pygame_manager import PygameManager, PygameColors, PygameKeys
 
 
 def main():
-    """Entry point for program that tests the PygameManager
+    """Entry point for program that demonstrates PygameManager
 
         Instructions: 
             1. from pygame_manager import PygameManager, PygameColors, PygameKeys

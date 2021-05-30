@@ -142,10 +142,15 @@ class PygameManager:
             pygame.display.update()
             self.clock.tick(self.FPS)
 
-    def stop_game(self) -> None:
-        """Removes all objects from the screen, including events"""
+    def stop_game(self, preserve_text=False) -> None:
+        """Removes all objects from the screen, including events
+        
+            Args:
+                preserve_text: If true, preserve all text on the screen.
+        """
+        if not preserve_text:
+            self.texts = {}
         self.rectangles = {}
-        self.texts = {}
         self.images = {}
         self.key_events = {}
         self.events = {}

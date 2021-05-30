@@ -103,7 +103,7 @@ pm.add_event(3, bullet_asteroid_collision)
 def player_asteroid_collision():
     for asteroid in asteroids:
         if pm.check_collision(spaceship, asteroid):
-            pm.stop_game()
+            pm.stop_game(True)
             pm.draw_text(215, 300, 100, 'Game Over', pm.get_uuid(), PygameColors.RED)
 pm.add_event(4, player_asteroid_collision)
             
