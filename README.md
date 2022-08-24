@@ -1,5 +1,5 @@
 # Pygame Manager
-This is an interface that allows the user to easily interface with pygame.
+This allows the user to easily interface with pygame and write their own games with ease. 
 
 ## Screenshots
 ![Space Shooter](Images/pb-demo.PNG?raw=true)
